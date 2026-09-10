@@ -1,0 +1,1548 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHULAMAN_E_ABBAS SCHOOL | U Speak</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    linear-gradient(rgba(0,20,40,.78),rgba(0,20,40,.85)),
+    url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1920&q=80")
+    center/cover fixed;
+    color:white;
+}
+
+header{
+    background:rgba(0,0,0,.75);
+    padding:18px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+header h1{
+    font-size:30px;
+    animation:titleMove 2s infinite alternate;
+}
+
+@keyframes titleMove{
+    from{letter-spacing:2px}
+    to{letter-spacing:6px}
+}
+
+header p{
+    color:#ffd166;
+    margin-top:5px;
+}
+
+nav{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:15px;
+}
+
+nav button{
+    background:#1976d2;
+    color:white;
+    border:0;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+nav button:hover{
+    background:#0d47a1;
+}
+
+.container{
+    width:95%;
+    max-width:1200px;
+    margin:25px auto;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.card{
+    background:rgba(0,0,0,.72);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+h2{
+    color:#ffd166;
+    margin-bottom:15px;
+}
+
+h3{
+    color:#90caf9;
+    margin-bottom:10px;
+}
+
+input,select{
+    width:100%;
+    padding:13px;
+    margin:8px 0;
+    border:0;
+    border-radius:8px;
+    outline:none;
+}
+
+.main-btn{
+    border:0;
+    padding:12px 20px;
+    border-radius:9px;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+    margin:5px;
+}
+
+.main-btn:hover{
+    background:#008f72;
+}
+
+.danger{
+    background:#d62828 !important;
+}
+
+.blue{
+    background:#1976d2 !important;
+}
+
+.warning{
+    background:#f39c12 !important;
+}
+
+.center{
+    text-align:center;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
+
+.subject{
+    background:rgba(255,255,255,.1);
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.subject:hover{
+    transform:translateY(-6px);
+    background:rgba(25,118,210,.5);
+}
+
+.subject .icon{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+.assign-item{
+    background:rgba(255,255,255,.08);
+    border-left:5px solid #00b894;
+    padding:18px;
+    border-radius:12px;
+    margin:12px 0;
+}
+
+.status{
+    padding:12px;
+    border-radius:8px;
+    background:#14532d;
+    margin:10px 0;
+}
+
+#timer{
+    position:sticky;
+    top:100px;
+    background:#d62828;
+    padding:12px;
+    text-align:center;
+    border-radius:10px;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.option{
+    display:block;
+    background:rgba(255,255,255,.08);
+    padding:12px;
+    margin:8px 0;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.option:hover{
+    background:rgba(25,118,210,.4);
+}
+
+.option input{
+    width:auto;
+    margin-right:8px;
+}
+
+.ai-box{
+    min-height:120px;
+    background:#071b2b;
+    padding:15px;
+    border-radius:12px;
+    margin-top:10px;
+}
+
+.ai-message{
+    padding:10px;
+    margin:7px 0;
+    border-radius:8px;
+    background:#12395a;
+}
+
+.small{
+    color:#bbb;
+    font-size:14px;
+}
+
+.hidden{
+    display:none !important;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    color:#ccc;
+}
+
+@media(max-width:600px){
+    header h1{
+        font-size:21px;
+    }
+
+    .card{
+        padding:17px;
+    }
+
+    nav button{
+        font-size:12px;
+        padding:8px 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>GHULAMAN_E_ABBAS SCHOOL</h1>
+    <p>U Speak by Mehdi Abbas</p>
+
+    <nav id="navbar">
+        <button onclick="showPage('home')">🏠 Home</button>
+        <button onclick="showPage('tests')">📝 Tests</button>
+        <button onclick="showPage('listening')">🎧 Listening</button>
+        <button onclick="showPage('puzzle')">🧩 Puzzle</button>
+        <button onclick="showPage('ai')">🤖 AI Conversation</button>
+        <button id="adminNav" class="hidden" onclick="showPage('admin')">👨‍💼 Admin Panel</button>
+        <button id="studentNav" class="hidden" onclick="showPage('student')">👨‍🎓 My Tests</button>
+        <button onclick="logout()">🚪 Logout</button>
+    </nav>
+</header>
+
+<div class="container">
+
+<!-- LOGIN -->
+<section id="login" class="page active">
+    <div class="card center">
+        <h2>🔐 Login</h2>
+        <p>GHULAMAN_E_ABBAS SCHOOL</p>
+
+        <button class="main-btn blue" onclick="setRole('admin')">👨‍💼 Admin Login</button>
+        <button class="main-btn" onclick="setRole('student')">👨‍🎓 Student Login</button>
+
+        <div id="loginForm" class="hidden">
+            <h3 id="loginTitle"></h3>
+
+            <input id="loginEmail" type="email" placeholder="Email">
+            <input id="loginPassword" type="password" placeholder="Password">
+
+            <input id="studentNameLogin"
+                   class="hidden"
+                   placeholder="Student Name">
+
+            <button class="main-btn" onclick="login()">Login</button>
+
+            <p class="small">
+                Admin Demo: admin@school.com / Admin123
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- HOME -->
+<section id="home" class="page">
+    <div class="card center">
+        <h2>🎓 Welcome to U Speak</h2>
+        <p>
+            Online testing platform for GHULAMAN_E_ABBAS SCHOOL.
+        </p>
+        <br>
+        <button class="main-btn" onclick="showPage('tests')">
+            Start Learning
+        </button>
+    </div>
+
+    <div class="grid">
+        <div class="subject">
+            <div class="icon">🕌</div>
+            <h3>Islamic Studies</h3>
+            <p>40 Questions</p>
+        </div>
+
+        <div class="subject">
+            <div class="icon">🌍</div>
+            <h3>General Knowledge</h3>
+            <p>40 Questions</p>
+        </div>
+
+        <div class="subject">
+            <div class="icon">🔬</div>
+            <h3>Science</h3>
+            <p>30 Questions</p>
+        </div>
+
+        <div class="subject">
+            <div class="icon">💻</div>
+            <h3>Computer</h3>
+            <p>30 Questions</p>
+        </div>
+
+        <div class="subject">
+            <div class="icon">🇵🇰</div>
+            <h3>Pakistan Studies</h3>
+            <p>30 Questions</p>
+        </div>
+
+        <div class="subject">
+            <div class="icon">📚</div>
+            <h3>English</h3>
+            <p>30 Questions</p>
+        </div>
+    </div>
+</section>
+
+<!-- TESTS -->
+<section id="tests" class="page">
+
+    <div class="card">
+        <h2>📝 Test Portion</h2>
+
+        <div class="grid">
+            <div class="subject">
+                <div class="icon">🕌</div>
+                <h3>Islamic Studies</h3>
+                <button class="main-btn" onclick="startTest('Islamic Studies')">Start</button>
+            </div>
+
+            <div class="subject">
+                <div class="icon">🌍</div>
+                <h3>General Knowledge</h3>
+                <button class="main-btn" onclick="startTest('General Knowledge')">Start</button>
+            </div>
+
+            <div class="subject">
+                <div class="icon">🔬</div>
+                <h3>Science</h3>
+                <button class="main-btn" onclick="startTest('Science')">Start</button>
+            </div>
+
+            <div class="subject">
+                <div class="icon">💻</div>
+                <h3>Computer</h3>
+                <button class="main-btn" onclick="startTest('Computer')">Start</button>
+            </div>
+
+            <div class="subject">
+                <div class="icon">🇵🇰</div>
+                <h3>Pakistan Studies</h3>
+                <button class="main-btn" onclick="startTest('Pakistan Studies')">Start</button>
+            </div>
+
+            <div class="subject">
+                <div class="icon">📚</div>
+                <h3>English</h3>
+                <button class="main-btn" onclick="startTest('English')">Start</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ADMIN -->
+<section id="admin" class="page">
+
+    <div class="card">
+        <h2>👨‍💼 Admin Panel</h2>
+
+        <div class="status">
+            ✅ You are logged in as Admin.
+        </div>
+
+        <h3>➕ Assign Test</h3>
+
+        <input id="studentName"
+               placeholder="Enter Student Name">
+
+        <select id="assignedTest">
+            <option value="Islamic Studies">Islamic Studies</option>
+            <option value="General Knowledge">General Knowledge</option>
+            <option value="Science">Science</option>
+            <option value="Computer">Computer</option>
+            <option value="Pakistan Studies">Pakistan Studies</option>
+            <option value="English">English</option>
+        </select>
+
+        <select id="assignedTime">
+            <option value="6">6 Minutes</option>
+            <option value="10">10 Minutes</option>
+            <option value="15">15 Minutes</option>
+        </select>
+
+        <button class="main-btn"
+                onclick="assignTest()">
+            ➕ Assign Test
+        </button>
+    </div>
+
+    <div class="card">
+        <h2>📋 Assigned Tests</h2>
+        <div id="adminAssignedList"></div>
+    </div>
+
+</section>
+
+<!-- STUDENT -->
+<section id="student" class="page">
+
+    <div class="card">
+        <h2>👨‍🎓 Student Dashboard</h2>
+
+        <div id="studentWelcome"></div>
+
+        <div id="studentAssignedList"></div>
+    </div>
+
+</section>
+
+<!-- LISTENING -->
+<section id="listening" class="page">
+
+    <div class="card">
+        <h2>🎧 Listening Practice</h2>
+
+        <p id="listeningText">
+            Education is very important in our life. It helps us learn new
+            things, improve our skills and become responsible members of society.
+            Students should study regularly and respect their teachers.
+        </p>
+
+        <br>
+
+        <button class="main-btn" onclick="speakText()">▶️ Play</button>
+        <button class="main-btn blue" onclick="speechSynthesis.pause()">⏸️ Pause</button>
+        <button class="main-btn warning" onclick="speechSynthesis.resume()">▶️ Resume</button>
+        <button class="main-btn danger" onclick="speechSynthesis.cancel()">⏹️ Stop</button>
+
+        <hr><br>
+
+        <h3>Questions</h3>
+
+        <p>1. Why is education important?</p>
+        <p>2. What should students do regularly?</p>
+
+        <br>
+
+        <input placeholder="Answer 1">
+        <input placeholder="Answer 2">
+
+        <button class="main-btn" onclick="alert('Listening answers submitted!')">
+            Submit
+        </button>
+    </div>
+
+</section>
+
+<!-- PUZZLE -->
+<section id="puzzle" class="page">
+
+    <div class="card center">
+        <h2>🧩 Puzzle Game</h2>
+
+        <p>Arrange the numbers in correct order:</p>
+
+        <br>
+
+        <button class="main-btn" onclick="shufflePuzzle()">
+            🔀 Shuffle
+        </button>
+
+        <div id="puzzleBox" class="grid"></div>
+
+        <br>
+
+        <p id="puzzleResult"></p>
+    </div>
+
+</section>
+
+<!-- AI -->
+<section id="ai" class="page">
+
+    <div class="card">
+        <h2>🤖 AI Conversation</h2>
+
+        <p>
+            Practice English conversation with AI.
+        </p>
+
+        <br>
+
+        <select id="aiLevel">
+            <option>Level 1 - Beginner</option>
+            <option>Level 2</option>
+            <option>Level 3</option>
+            <option>Level 4</option>
+            <option>Level 5</option>
+            <option>Level 6</option>
+            <option>Level 7</option>
+            <option>Level 8</option>
+            <option>Level 9</option>
+            <option>Level 10 - Advanced</option>
+        </select>
+
+        <div id="aiBox" class="ai-box">
+            <div class="ai-message">
+                🤖 AI Says: Hello! How are you today?
+            </div>
+        </div>
+
+        <br>
+
+        <input id="aiInput"
+               placeholder="Write your English message...">
+
+        <button class="main-btn"
+                onclick="sendAI()">
+            Send
+        </button>
+    </div>
+
+</section>
+
+<!-- TEST SCREEN -->
+<section id="testScreen" class="page">
+
+    <div class="card">
+        <h2 id="testTitle">Test</h2>
+
+        <div id="timer">06:00</div>
+
+        <div id="questionBox"></div>
+
+        <button class="main-btn blue"
+                onclick="nextQuestion()">
+            Next Question →
+        </button>
+
+        <button class="main-btn"
+                onclick="submitTest()">
+            Submit Test
+        </button>
+    </div>
+
+</section>
+
+</div>
+
+<footer>
+    © 2026 GHULAMAN_E_ABBAS SCHOOL | U Speak by Mehdi Abbas
+</footer>
+
+
+<script>
+
+/* =========================
+   LOGIN / ROLE SYSTEM
+========================= */
+
+let currentRole = "";
+let currentStudent = "";
+
+function setRole(role){
+
+    currentRole = role;
+
+    document.getElementById("loginForm").classList.remove("hidden");
+
+    if(role === "admin"){
+        document.getElementById("loginTitle").innerText =
+            "👨‍💼 Admin Login";
+
+        document.getElementById("studentNameLogin")
+            .classList.add("hidden");
+
+        document.getElementById("loginEmail").classList.remove("hidden");
+        document.getElementById("loginPassword").classList.remove("hidden");
+    }
+
+    if(role === "student"){
+        document.getElementById("loginTitle").innerText =
+            "👨‍🎓 Student Login";
+
+        document.getElementById("studentNameLogin")
+            .classList.remove("hidden");
+
+        document.getElementById("loginEmail").classList.add("hidden");
+        document.getElementById("loginPassword").classList.add("hidden");
+    }
+}
+
+function login(){
+
+    if(currentRole === "admin"){
+
+        let email = document.getElementById("loginEmail").value;
+        let password = document.getElementById("loginPassword").value;
+
+        if(email === "admin@school.com" &&
+           password === "Admin123"){
+
+            localStorage.setItem("uSpeakRole","admin");
+
+            alert("✅ Admin Login Successful!");
+
+            setupRoleUI();
+            showPage("admin");
+
+        }else{
+            alert("❌ Wrong Admin Email or Password");
+        }
+
+    }else if(currentRole === "student"){
+
+        let name = document.getElementById("studentNameLogin").value.trim();
+
+        if(name === ""){
+            alert("Please enter your student name.");
+            return;
+        }
+
+        currentStudent = name;
+
+        localStorage.setItem("uSpeakRole","student");
+        localStorage.setItem("uSpeakStudent",name);
+
+        setupRoleUI();
+        showPage("student");
+        displayStudentTests();
+    }
+}
+
+function setupRoleUI(){
+
+    let role = localStorage.getItem("uSpeakRole");
+
+    document.getElementById("adminNav")
+        .classList.toggle("hidden",role !== "admin");
+
+    document.getElementById("studentNav")
+        .classList.toggle("hidden",role !== "student");
+
+    document.getElementById("login")
+        .classList.toggle("active",false);
+}
+
+function logout(){
+
+    localStorage.removeItem("uSpeakRole");
+    localStorage.removeItem("uSpeakStudent");
+
+    currentRole = "";
+    currentStudent = "";
+
+    document.getElementById("adminNav").classList.add("hidden");
+    document.getElementById("studentNav").classList.add("hidden");
+
+    showPage("login");
+
+    alert("Logged out successfully.");
+}
+
+
+/* =========================
+   PAGE SYSTEM
+========================= */
+
+function showPage(id){
+
+    document.querySelectorAll(".page")
+        .forEach(p=>p.classList.remove("active"));
+
+    let page = document.getElementById(id);
+
+    if(page){
+        page.classList.add("active");
+    }
+
+    if(id === "admin"){
+        displayAdminTests();
+    }
+
+    if(id === "student"){
+        displayStudentTests();
+    }
+}
+
+
+/* =========================
+   ASSIGN TEST SYSTEM
+========================= */
+
+let assignedTests =
+    JSON.parse(localStorage.getItem("uSpeakAssignedTests")) || [];
+
+
+function escapeHTML(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+function assignTest(){
+
+    if(localStorage.getItem("uSpeakRole") !== "admin"){
+        alert("❌ Only Admin can assign tests.");
+        return;
+    }
+
+    let student =
+        document.getElementById("studentName").value.trim();
+
+    let test =
+        document.getElementById("assignedTest").value;
+
+    let time =
+        document.getElementById("assignedTime").value;
+
+    if(student === ""){
+        alert("Please enter student name.");
+        return;
+    }
+
+    let newTest = {
+        id: Date.now(),
+        student: student,
+        test: test,
+        time: time,
+        date: new Date().toLocaleString()
+    };
+
+    assignedTests.push(newTest);
+
+    localStorage.setItem(
+        "uSpeakAssignedTests",
+        JSON.stringify(assignedTests)
+    );
+
+    document.getElementById("studentName").value = "";
+
+    alert("🎉 Test Assigned Successfully!");
+
+    displayAdminTests();
+}
+
+
+function displayAdminTests(){
+
+    let box =
+        document.getElementById("adminAssignedList");
+
+    if(!box) return;
+
+    assignedTests =
+        JSON.parse(localStorage.getItem("uSpeakAssignedTests")) || [];
+
+    if(assignedTests.length === 0){
+
+        box.innerHTML =
+            "<p class='small'>No test assigned yet.</p>";
+
+        return;
+    }
+
+    box.innerHTML = "";
+
+    assignedTests.forEach(item=>{
+
+        box.innerHTML += `
+        <div class="assign-item">
+
+            <h3>📋 Assigned Test</h3>
+
+            <p>👤 <b>Student:</b>
+            ${escapeHTML(item.student)}</p>
+
+            <p>📝 <b>Test:</b>
+            ${escapeHTML(item.test)}</p>
+
+            <p>⏱️ <b>Time:</b>
+            ${escapeHTML(item.time)} Minutes</p>
+
+            <p>📅 <b>Assigned:</b>
+            ${escapeHTML(item.date)}</p>
+
+            <br>
+
+            <button class="main-btn"
+                onclick="startAssignedTest(${item.id})">
+                ▶️ Start Test
+            </button>
+
+            <button class="main-btn danger"
+                onclick="deleteAssignedTest(${item.id})">
+                🗑️ Delete Test
+            </button>
+
+        </div>`;
+    });
+}
+
+
+function deleteAssignedTest(id){
+
+    if(localStorage.getItem("uSpeakRole") !== "admin"){
+        alert("❌ Only Admin can delete tests.");
+        return;
+    }
+
+    let item =
+        assignedTests.find(x=>x.id === id);
+
+    if(!item){
+        alert("Assigned test not found.");
+        return;
+    }
+
+    if(!confirm(
+        "Are you sure you want to delete this assigned test?"
+    )){
+        return;
+    }
+
+    assignedTests =
+        assignedTests.filter(x=>x.id !== id);
+
+    localStorage.setItem(
+        "uSpeakAssignedTests",
+        JSON.stringify(assignedTests)
+    );
+
+    displayAdminTests();
+
+    alert("🗑️ Assigned Test Deleted Successfully!");
+}
+
+
+function displayStudentTests(){
+
+    let box =
+        document.getElementById("studentAssignedList");
+
+    let welcome =
+        document.getElementById("studentWelcome");
+
+    if(!box) return;
+
+    currentStudent =
+        localStorage.getItem("uSpeakStudent") || "";
+
+    assignedTests =
+        JSON.parse(localStorage.getItem("uSpeakAssignedTests")) || [];
+
+    welcome.innerHTML =
+        `<div class="status">
+        👋 Welcome <b>${escapeHTML(currentStudent)}</b>
+        </div>`;
+
+    let myTests =
+        assignedTests.filter(item =>
+            item.student.toLowerCase() ===
+            currentStudent.toLowerCase()
+        );
+
+    if(myTests.length === 0){
+
+        box.innerHTML = `
+        <div class="assign-item">
+            <h3>📭 No Test Assigned</h3>
+            <p>Your teacher has not assigned a test yet.</p>
+        </div>`;
+
+        return;
+    }
+
+    box.innerHTML = `
+    <div class="status">
+        🎉 Test Assigned Successfully!
+    </div>`;
+
+    myTests.forEach(item=>{
+
+        box.innerHTML += `
+        <div class="assign-item">
+
+            <h3>📚 Your Assigned Test</h3>
+
+            <p>📝 Test:
+            <b>${escapeHTML(item.test)}</b></p>
+
+            <p>⏱️ Time:
+            <b>${escapeHTML(item.time)} Minutes</b></p>
+
+            <p>📅 Assigned:
+            ${escapeHTML(item.date)}</p>
+
+            <br>
+
+            <button class="main-btn"
+                onclick="startAssignedTest(${item.id})">
+                ▶️ Start Assigned Test
+            </button>
+
+        </div>`;
+    });
+}
+
+
+function startAssignedTest(id){
+
+    assignedTests =
+        JSON.parse(localStorage.getItem("uSpeakAssignedTests")) || [];
+
+    let item =
+        assignedTests.find(x=>x.id === id);
+
+    if(!item){
+        alert("Assigned test not found.");
+        return;
+    }
+
+    startTest(item.test,parseInt(item.time));
+}
+
+
+/* =========================
+   TEST SYSTEM
+========================= */
+
+let currentTest = "";
+let currentQuestions = [];
+let currentQuestion = 0;
+let score = 0;
+let timeLeft = 360;
+let timerInterval = null;
+
+function startTest(testName,minutes=6){
+
+    currentTest = testName;
+    currentQuestion = 0;
+    score = 0;
+    timeLeft = minutes * 60;
+
+    currentQuestions =
+        questionBank[testName] || [];
+
+    if(currentQuestions.length === 0){
+        alert("No questions found.");
+        return;
+    }
+
+    document.getElementById("testTitle").innerText =
+        "📝 " + testName + " Test";
+
+    showPage("testScreen");
+
+    showQuestion();
+
+    clearInterval(timerInterval);
+
+    timerInterval =
+        setInterval(updateTimer,1000);
+
+    updateTimer();
+}
+
+
+function updateTimer(){
+
+    let min =
+        Math.floor(timeLeft/60);
+
+    let sec =
+        timeLeft%60;
+
+    document.getElementById("timer").innerText =
+        String(min).padStart(2,"0") +
+        ":" +
+        String(sec).padStart(2,"0");
+
+    if(timeLeft <= 0){
+
+        clearInterval(timerInterval);
+
+        submitTest();
+
+        return;
+    }
+
+    timeLeft--;
+}
+
+
+function showQuestion(){
+
+    let q =
+        currentQuestions[currentQuestion];
+
+    let box =
+        document.getElementById("questionBox");
+
+    let html = `
+        <h3>
+        Question ${currentQuestion+1}
+        of ${currentQuestions.length}
+        </h3>
+
+        <p style="font-size:19px;margin:15px 0">
+        ${escapeHTML(q.q)}
+        </p>
+    `;
+
+    q.options.forEach((option,index)=>{
+
+        html += `
+        <label class="option">
+
+            <input type="radio"
+                   name="answer"
+                   value="${index}">
+
+            ${escapeHTML(option)}
+
+        </label>`;
+    });
+
+    box.innerHTML = html;
+}
+
+
+function nextQuestion(){
+
+    let selected =
+        document.querySelector(
+            'input[name="answer"]:checked'
+        );
+
+    if(selected &&
+       parseInt(selected.value) ===
+       currentQuestions[currentQuestion].correct){
+
+        score++;
+    }
+
+    if(currentQuestion <
+       currentQuestions.length-1){
+
+        currentQuestion++;
+
+        showQuestion();
+
+    }else{
+
+        submitTest();
+    }
+}
+
+
+function submitTest(){
+
+    clearInterval(timerInterval);
+
+    let selected =
+        document.querySelector(
+            'input[name="answer"]:checked'
+        );
+
+    if(selected &&
+       parseInt(selected.value) ===
+       currentQuestions[currentQuestion].correct){
+
+        score++;
+    }
+
+    let total =
+        currentQuestions.length;
+
+    alert(
+        "🎉 Test Completed!\n\n" +
+        "Test: " + currentTest +
+        "\nScore: " + score +
+        " / " + total
+    );
+
+    showPage(
+        localStorage.getItem("uSpeakRole") === "admin"
+        ? "admin"
+        : "student"
+    );
+}
+
+
+/* =========================
+   LISTENING
+========================= */
+
+function speakText(){
+
+    speechSynthesis.cancel();
+
+    let text =
+        document.getElementById("listeningText").innerText;
+
+    let speech =
+        new SpeechSynthesisUtterance(text);
+
+    speech.lang = "en-US";
+    speech.rate = 0.9;
+
+    speechSynthesis.speak(speech);
+}
+
+
+/* =========================
+   PUZZLE
+========================= */
+
+let puzzleNumbers = [1,2,3,4,5,6,7,8,9];
+
+function shufflePuzzle(){
+
+    puzzleNumbers.sort(()=>Math.random()-.5);
+
+    let box =
+        document.getElementById("puzzleBox");
+
+    box.innerHTML = "";
+
+    puzzleNumbers.forEach(num=>{
+
+        let button =
+            document.createElement("button");
+
+        button.className = "main-btn blue";
+        button.innerText = num;
+
+        box.appendChild(button);
+    });
+
+    if(puzzleNumbers.join("") === "123456789"){
+
+        document.getElementById("puzzleResult").innerText =
+            "🎉 Excellent! Puzzle Completed!";
+    }
+}
+
+
+/* =========================
+   AI CONVERSATION
+========================= */
+
+function sendAI(){
+
+    let input =
+        document.getElementById("aiInput");
+
+    let message =
+        input.value.trim();
+
+    if(message === "") return;
+
+    let box =
+        document.getElementById("aiBox");
+
+    box.innerHTML += `
+        <div class="ai-message">
+            👤 You: ${escapeHTML(message)}
+        </div>`;
+
+    let response =
+        getAIResponse(message);
+
+    box.innerHTML += `
+        <div class="ai-message">
+            🤖 AI Says: ${response}
+        </div>`;
+
+    input.value = "";
+
+    box.scrollTop = box.scrollHeight;
+}
+
+
+function getAIResponse(message){
+
+    let m =
+        message.toLowerCase();
+
+    if(m.includes("hello") ||
+       m.includes("hi")){
+
+        return "Hello! Nice to meet you. How are you?";
+    }
+
+    if(m.includes("how are you")){
+
+        return "I am fine, thank you. How are you?";
+    }
+
+    if(m.includes("name")){
+
+        return "My name is U Speak AI. What is your name?";
+    }
+
+    if(m.includes("school")){
+
+        return "School is a wonderful place to learn and grow.";
+    }
+
+    if(m.includes("thank")){
+
+        return "You are welcome!";
+    }
+
+    if(m.includes("goodbye") ||
+       m.includes("bye")){
+
+        return "Goodbye! Keep learning English!";
+    }
+
+    return "That is interesting! Please tell me more in English.";
+}
+
+
+/* =========================
+   QUESTION BANK
+========================= */
+
+const questionBank = {
+
+"Islamic Studies":[
+
+{q:"How many pillars of Islam are there?",options:["3","4","5","6"],correct:2},
+{q:"How many daily prayers are obligatory?",options:["3","4","5","6"],correct:2},
+{q:"Which is the first month of Islamic calendar?",options:["Muharram","Ramadan","Shawwal","Rajab"],correct:0},
+{q:"Which month is for fasting?",options:["Rajab","Ramadan","Safar","Shaban"],correct:1},
+{q:"How many Surahs are in the Quran?",options:["110","112","114","116"],correct:2},
+{q:"Which is the first Surah of Quran?",options:["Al-Baqarah","Al-Fatiha","Al-Ikhlas","An-Nas"],correct:1},
+{q:"Which is the longest Surah?",options:["Al-Fatiha","Al-Baqarah","Yaseen","Al-Kahf"],correct:1},
+{q:"Which is the shortest Surah?",options:["Al-Kawthar","Al-Falaq","An-Nas","Al-Asr"],correct:0},
+{q:"Who was the last Prophet?",options:["Prophet Musa","Prophet Isa","Prophet Muhammad","Prophet Ibrahim"],correct:2},
+{q:"What is the holy book of Islam?",options:["Bible","Torah","Quran","Zabur"],correct:2},
+{q:"What is the direction of prayer called?",options:["Qiblah","Miqat","Ihram","Sajdah"],correct:0},
+{q:"Where is the Kaaba located?",options:["Madinah","Makkah","Jerusalem","Taif"],correct:1},
+{q:"What is Zakat?",options:["Fasting","Charity","Prayer","Pilgrimage"],correct:1},
+{q:"What is Hajj?",options:["Pilgrimage","Charity","Fasting","Prayer"],correct:0},
+{q:"Eid-ul-Fitr comes after which month?",options:["Muharram","Ramadan","Rajab","Safar"],correct:1},
+{q:"Eid-ul-Adha is associated with which worship?",options:["Hajj","Zakat","Nikah","Wudu"],correct:0},
+{q:"What is Wudu?",options:["Prayer","Ablution","Charity","Fasting"],correct:1},
+{q:"What is Salah?",options:["Prayer","Charity","Pilgrimage","Fasting"],correct:0},
+{q:"What is Sawm?",options:["Fasting","Prayer","Charity","Hajj"],correct:0},
+{q:"What is Iman?",options:["Faith","Food","Travel","Charity"],correct:0},
+{q:"Which city is called the City of the Prophet?",options:["Makkah","Madinah","Kufa","Basra"],correct:1},
+{q:"Which angel brought revelation?",options:["Jibril","Mikail","Israfil","Izrail"],correct:0},
+{q:"Which night is better than a thousand months?",options:["Laylatul Qadr","Ashura","Shab-e-Barat","Eid night"],correct:0},
+{q:"What does Islam mean?",options:["Peace and submission","War","Travel","Knowledge"],correct:0},
+{q:"What is Tawheed?",options:["Oneness of Allah","Charity","Fasting","Pilgrimage"],correct:0},
+{q:"Which prayer is offered at dawn?",options:["Fajr","Zuhr","Asr","Isha"],correct:0},
+{q:"Which prayer is offered at noon?",options:["Fajr","Zuhr","Maghrib","Isha"],correct:1},
+{q:"Which prayer is offered after sunset?",options:["Fajr","Asr","Maghrib","Isha"],correct:2},
+{q:"Which prayer is offered at night?",options:["Fajr","Zuhr","Maghrib","Isha"],correct:3},
+{q:"What is the Quran written in originally?",options:["Arabic","Persian","Urdu","English"],correct:0},
+{q:"What is a mosque called in Arabic?",options:["Masjid","Madrasa","Bait","Dar"],correct:0},
+{q:"Which prophet built the Kaaba with his son?",options:["Ibrahim","Musa","Nuh","Yusuf"],correct:0},
+{q:"Who was the first human?",options:["Adam","Nuh","Ibrahim","Musa"],correct:0},
+{q:"Which prophet was swallowed by a fish?",options:["Yunus","Yusuf","Isa","Musa"],correct:0},
+{q:"Which prophet built an ark?",options:["Nuh","Ibrahim","Yusuf","Dawud"],correct:0},
+{q:"Which prophet was known for interpreting dreams?",options:["Yusuf","Musa","Nuh","Adam"],correct:0},
+{q:"What is Dua?",options:["Supplication","Fasting","Prayer time","Charity"],correct:0},
+{q:"What is Sunnah?",options:["Way of the Prophet","A place","A month","A prayer"],correct:0},
+{q:"What is Hadith?",options:["Reports of the Prophet's sayings/actions","A prayer","A month","A charity"],correct:0},
+{q:"What is Shirk?",options:["Associating partners with Allah","Prayer","Charity","Fasting"],correct:0}
+
+],
+
+"General Knowledge":[
+
+{q:"What is the capital of France?",options:["Paris","London","Rome","Berlin"],correct:0},
+{q:"Which is the largest ocean?",options:["Atlantic","Indian","Pacific","Arctic"],correct:2},
+{q:"How many continents are there?",options:["5","6","7","8"],correct:2},
+{q:"How many oceans are commonly recognized?",options:["3","4","5","6"],correct:2},
+{q:"Which is the largest continent?",options:["Asia","Africa","Europe","Australia"],correct:0},
+{q:"Which is the smallest continent?",options:["Asia","Europe","Australia","Africa"],correct:2},
+{q:"What is the capital of Japan?",options:["Tokyo","Seoul","Beijing","Bangkok"],correct:0},
+{q:"What is the capital of China?",options:["Tokyo","Beijing","Seoul","Delhi"],correct:1},
+{q:"What is the capital of UK?",options:["London","Paris","Rome","Madrid"],correct:0},
+{q:"Which planet is called the Red Planet?",options:["Earth","Mars","Jupiter","Venus"],correct:1},
+{q:"Which is the largest planet?",options:["Earth","Mars","Jupiter","Mercury"],correct:2},
+{q:"Which planet is closest to the Sun?",options:["Mercury","Venus","Earth","Mars"],correct:0},
+{q:"How many days are in a leap year?",options:["364","365","366","367"],correct:2},
+{q:"How many months are in a year?",options:["10","11","12","13"],correct:2},
+{q:"How many hours are in a day?",options:["12","18","24","30"],correct:2},
+{q:"How many minutes are in an hour?",options:["30","45","60","90"],correct:2},
+{q:"Which animal is called King of Jungle?",options:["Tiger","Lion","Elephant","Bear"],correct:1},
+{q:"What is the fastest land animal?",options:["Lion","Cheetah","Horse","Tiger"],correct:1},
+{q:"Which bird cannot fly?",options:["Eagle","Sparrow","Penguin","Crow"],correct:2},
+{q:"Which is the largest land animal?",options:["Elephant","Horse","Giraffe","Rhino"],correct:0},
+{q:"What is the currency of Japan?",options:["Yuan","Yen","Won","Dollar"],correct:1},
+{q:"What is the currency of UK?",options:["Euro","Pound","Dollar","Yen"],correct:1},
+{q:"What is the currency of USA?",options:["Dollar","Euro","Pound","Yen"],correct:0},
+{q:"Which country is famous for pyramids?",options:["Egypt","Pakistan","Japan","Canada"],correct:0},
+{q:"Which is the highest mountain?",options:["K2","Everest","Nanga Parbat","Fuji"],correct:1},
+{q:"Which is commonly recognized as the longest river?",options:["Nile","Indus","Amazon","Danube"],correct:0},
+{q:"Where is the Great Wall?",options:["China","Japan","India","Russia"],correct:0},
+{q:"Which sport uses a bat and ball?",options:["Football","Cricket","Swimming","Boxing"],correct:1},
+{q:"How many players are in a cricket team?",options:["9","10","11","12"],correct:2},
+{q:"How many football players are on field per team?",options:["9","10","11","12"],correct:2},
+{q:"What is H2O?",options:["Salt","Water","Oxygen","Hydrogen"],correct:1},
+{q:"Red + White makes?",options:["Pink","Green","Blue","Black"],correct:0},
+{q:"How many letters are in English alphabet?",options:["24","25","26","27"],correct:2},
+{q:"Which is the largest mammal?",options:["Blue whale","Elephant","Giraffe","Shark"],correct:0},
+{q:"Which gas do humans breathe in?",options:["Oxygen","Carbon dioxide","Nitrogen only","Hydrogen"],correct:0},
+{q:"What is opposite of north?",options:["East","West","South","Up"],correct:2},
+{q:"Which instrument measures temperature?",options:["Barometer","Thermometer","Compass","Clock"],correct:1},
+{q:"Which instrument shows direction?",options:["Compass","Thermometer","Scale","Clock"],correct:0},
+{q:"What is the study of maps called?",options:["Geography","Cartography","Biology","Physics"],correct:1},
+{q:"What is Earth's natural satellite?",options:["Sun","Moon","Mars","Venus"],correct:1}
+
+],
+
+"Science":[
+
+{q:"What is the basic unit of life?",options:["Cell","Tissue","Organ","Atom"],correct:0},
+{q:"Which organ pumps blood?",options:["Brain","Heart","Lungs","Kidney"],correct:1},
+{q:"Which organ helps us breathe?",options:["Heart","Liver","Lungs","Brain"],correct:2},
+{q:"What is the center of an atom called?",options:["Electron","Nucleus","Proton","Shell"],correct:1},
+{q:"Which particle has negative charge?",options:["Proton","Electron","Neutron","Nucleus"],correct:1},
+{q:"Which particle has positive charge?",options:["Proton","Electron","Neutron","Atom"],correct:0},
+{q:"Which particle has no charge?",options:["Proton","Electron","Neutron","Ion"],correct:2},
+{q:"Plants use which gas for photosynthesis?",options:["Oxygen","Carbon dioxide","Hydrogen","Nitrogen"],correct:1},
+{q:"Plants release which gas?",options:["Oxygen","Carbon dioxide","Hydrogen","Helium"],correct:0},
+{q:"What is the process by which plants make food?",options:["Respiration","Photosynthesis","Digestion","Evaporation"],correct:1},
+{q:"Solid form of water is?",options:["Ice","Steam","Rain","Cloud"],correct:0},
+{q:"Gas form of water is?",options:["Ice","Steam","Snow","Liquid"],correct:1},
+{q:"Water freezes at?",options:["0°C","10°C","50°C","100°C"],correct:0},
+{q:"Water boils at sea level at?",options:["50°C","75°C","100°C","120°C"],correct:2},
+{q:"What force pulls objects toward Earth?",options:["Friction","Gravity","Magnetism","Heat"],correct:1},
+{q:"Energy of motion is called?",options:["Potential","Kinetic","Chemical","Sound"],correct:1},
+{q:"Stored energy is called?",options:["Kinetic","Potential","Light","Sound"],correct:1},
+{q:"Which planet has visible rings?",options:["Earth","Mars","Saturn","Venus"],correct:2},
+{q:"What is Earth's outer solid layer?",options:["Mantle","Outer core","Crust","Inner core"],correct:2},
+{q:"Which Earth layer is liquid?",options:["Crust","Mantle","Outer core","Inner core"],correct:2},
+{q:"Day and night occur because of Earth's?",options:["Rotation","Revolution","Shape","Gravity"],correct:0},
+{q:"Why do seasons change?",options:["Earth's tilt and revolution","Moon","Clouds","Oceans"],correct:0},
+{q:"What is the nearest star to Earth?",options:["Moon","Sun","Mars","Venus"],correct:1},
+{q:"A light year measures?",options:["Time","Distance","Speed","Weight"],correct:1},
+{q:"Sunlight helps our body make vitamin?",options:["A","B","C","D"],correct:3},
+{q:"Which blood cells fight infection?",options:["Red","White","Platelets","Plasma"],correct:1},
+{q:"Red blood cells carry?",options:["Oxygen","Water","Food","Bones"],correct:0},
+{q:"What is the largest organ of human body?",options:["Heart","Skin","Liver","Brain"],correct:1},
+{q:"Which organ controls the body?",options:["Heart","Brain","Lungs","Kidney"],correct:1},
+{q:"Study of living things is called?",options:["Biology","Physics","Chemistry","Geology"],correct:0}
+
+],
+
+"Computer":[
+
+{q:"CPU stands for?",options:["Central Processing Unit","Computer Personal Unit","Central Program Unit","Control Processing User"],correct:0},
+{q:"RAM stands for?",options:["Random Access Memory","Read Access Memory","Rapid Action Memory","Random Active Machine"],correct:0},
+{q:"ROM stands for?",options:["Read Only Memory","Random Only Memory","Read Open Memory","Run Only Machine"],correct:0},
+{q:"Brain of computer is?",options:["Monitor","CPU","Keyboard","Printer"],correct:1},
+{q:"Which device is used for typing?",options:["Mouse","Keyboard","Monitor","Printer"],correct:1},
+{q:"Which device displays output?",options:["Keyboard","Monitor","Mouse","Scanner"],correct:1},
+{q:"Which device prints documents?",options:["Scanner","Printer","Mouse","CPU"],correct:1},
+{q:"Which device scans documents?",options:["Printer","Scanner","Monitor","Keyboard"],correct:1},
+{q:"USB stands for?",options:["Universal Serial Bus","United System Bus","Universal System Board","User Serial Board"],correct:0},
+{q:"WWW stands for?",options:["World Wide Web","World Web Window","Wide World Web","Web World Wide"],correct:0},
+{q:"Which software is used to access websites?",options:["Browser","Calculator","Paint","Notepad"],correct:0},
+{q:"Which is a web browser?",options:["Chrome","Windows","Excel","PowerPoint"],correct:0},
+{q:"Which is an operating system?",options:["Windows","Google","Chrome","HTML"],correct:0},
+{q:"Windows was developed by?",options:["Apple","Microsoft","Google","Intel"],correct:1},
+{q:"Who makes iPhone?",options:["Samsung","Apple","Microsoft","Google"],correct:1},
+{q:"Email means?",options:["Electronic messages","Easy mail","Emergency mail","Electric machine"],correct:0},
+{q:"Which symbol is used in email addresses?",options:["#","@","$","%"],correct:1},
+{q:"A password is?",options:["Secret access code","Computer screen","Keyboard key","Website"],correct:0},
+{q:"Malware means?",options:["Malicious software","Good software","Mail software","Memory software"],correct:0},
+{q:"A computer virus is?",options:["Malicious program","Keyboard","Monitor","Printer"],correct:0},
+{q:"AI stands for?",options:["Artificial Intelligence","Automatic Internet","Advanced Input","Artificial Internet"],correct:0},
+{q:"HTML stands for?",options:["HyperText Markup Language","HighText Machine Language","Hyper Tool Mark Language","Home Text Mark Language"],correct:0},
+{q:"CSS stands for?",options:["Cascading Style Sheets","Computer Style System","Color Style Sheet","Creative Style System"],correct:0},
+{q:"JavaScript is commonly used for?",options:["Web interactivity","Printing only","Typing","Scanning"],correct:0},
+{q:"Which is a search engine?",options:["Google","Windows","Keyboard","CPU"],correct:0},
+{q:"Cloud storage stores data?",options:["Online","Only on paper","Only in keyboard","In printer"],correct:0},
+{q:"Wi-Fi is used for?",options:["Wireless networking","Printing only","Typing","Scanning"],correct:0},
+{q:"Bluetooth is?",options:["Short-range wireless technology","A printer","An OS","A browser"],correct:0},
+{q:"A file is?",options:["Collection of stored data","A monitor","A keyboard","A mouse"],correct:0},
+{q:"A folder is used to?",options:["Contain files","Print files","Scan files","Display videos"],correct:0}
+
+],
+
+"Pakistan Studies":[
+
+{q:"What is the capital of Pakistan?",options:["Karachi","Lahore","Islamabad","Quetta"],correct:2},
+{q:"What is the national language of Pakistan?",options:["English","Urdu","Punjabi","Sindhi"],correct:1},
+{q:"When is Pakistan Day celebrated?",options:["14 August","23 March","6 September","25 December"],correct:1},
+{q:"When is Independence Day?",options:["23 March","14 August","6 September","25 December"],correct:1},
+{q:"Who is the founder of Pakistan?",options:["Allama Iqbal","Quaid-e-Azam","Liaquat Ali Khan","Sir Syed"],correct:1},
+{q:"What was Quaid-e-Azam's real name?",options:["Muhammad Ali Jinnah","Ali Jinnah Khan","Muhammad Jinnah Ali","Jinnah Muhammad"],correct:0},
+{q:"Who is the national poet of Pakistan?",options:["Allama Iqbal","Faiz Ahmed Faiz","Mir Taqi Mir","Ghalib"],correct:0},
+{q:"What is the national flower?",options:["Rose","Jasmine","Tulip","Sunflower"],correct:1},
+{q:"What is the national animal?",options:["Lion","Markhor","Tiger","Deer"],correct:1},
+{q:"What is the national bird?",options:["Eagle","Chukar","Parrot","Peacock"],correct:1},
+{q:"Which is the largest province by area?",options:["Punjab","Sindh","Balochistan","KPK"],correct:2},
+{q:"Which province is most populous?",options:["Punjab","Sindh","Balochistan","KPK"],correct:0},
+{q:"Which city is called City of Lights?",options:["Lahore","Karachi","Islamabad","Quetta"],correct:1},
+{q:"What is the largest city of Pakistan?",options:["Lahore","Karachi","Islamabad","Peshawar"],correct:1},
+{q:"Which is Pakistan's highest mountain?",options:["Nanga Parbat","K2","Everest","Rakaposhi"],correct:1},
+{q:"K2 belongs to which mountain range?",options:["Himalaya","Karakoram","Hindu Kush","Alps"],correct:1},
+{q:"Which sea lies south of Pakistan?",options:["Arabian Sea","Red Sea","Black Sea","Caspian Sea"],correct:0},
+{q:"Which river is the lifeline of Pakistan?",options:["Indus","Ravi","Chenab","Jhelum"],correct:0},
+{q:"Which port is in Balochistan?",options:["Karachi","Gwadar","Port Qasim","Ormara"],correct:1},
+{q:"Gwadar is in which province?",options:["Sindh","Punjab","Balochistan","KPK"],correct:2},
+{q:"National sport traditionally associated with Pakistan?",options:["Hockey","Cricket","Football","Tennis"],correct:0},
+{q:"What is the currency of Pakistan?",options:["Dollar","Rupee","Taka","Riyal"],correct:1},
+{q:"Badshahi Mosque is in?",options:["Karachi","Lahore","Islamabad","Multan"],correct:1},
+{q:"Minar-e-Pakistan is in?",options:["Lahore","Karachi","Quetta","Peshawar"],correct:0},
+{q:"Faisal Mosque is in?",options:["Lahore","Islamabad","Karachi","Multan"],correct:1},
+{q:"Does Pakistan share a border with China?",options:["Yes","No"],correct:0},
+{q:"Does Pakistan share a border with Iran?",options:["Yes","No"],correct:0},
+{q:"Does Pakistan share a border with Afghanistan?",options:["Yes","No"],correct:0},
+{q:"Does Pakistan share a border with India?",options:["Yes","No"],correct:0},
+{q:"Indus Delta is mainly in?",options:["Sindh","Punjab","Balochistan","KPK"],correct:0}
+
+],
+
+"English":[
+
+{q:"Ali is a boy. ___ is tall.",options:["He","She","It","They"],correct:0},
+{q:"Sara is kind. ___ helps me.",options:["He","She","They","It"],correct:1},
+{q:"Which is a noun?",options:["Run","Beautiful","Book","Quickly"],correct:2},
+{q:"Which is a verb?",options:["Run","Beautiful","Book","Slow"],correct:0},
+{q:"Which is an adjective?",options:["Run","Beautiful","Quickly","Book"],correct:1},
+{q:"Which is an adverb?",options:["Quickly","Book","Beautiful","Run"],correct:0},
+{q:"___ apple.",options:["A","An","The","No"],correct:1},
+{q:"___ book.",options:["A","An","The","No"],correct:0},
+{q:"Past tense of go?",options:["Goed","Went","Gone","Going"],correct:1},
+{q:"Past tense of eat?",options:["Eated","Ate","Eating","Eats"],correct:1},
+{q:"Plural of child?",options:["Childs","Children","Childes","Childrens"],correct:1},
+{q:"Plural of man?",options:["Mans","Men","Manes","Mens"],correct:1},
+{q:"Opposite of hot?",options:["Warm","Cold","Big","Fast"],correct:1},
+{q:"Opposite of big?",options:["Small","Tall","Long","Wide"],correct:0},
+{q:"Synonym of happy?",options:["Sad","Glad","Angry","Slow"],correct:1},
+{q:"Synonym of quick?",options:["Fast","Slow","Late","Weak"],correct:0},
+{q:"She ___ a teacher.",options:["am","is","are","be"],correct:1},
+{q:"They ___ students.",options:["am","is","are","be"],correct:2},
+{q:"I ___ ready.",options:["am","is","are","be"],correct:0},
+{q:"He ___ football.",options:["play","plays","playing","played"],correct:1},
+{q:"Which is a personal pronoun?",options:["He","Book","Run","Beautiful"],correct:0},
+{q:"Choose the correct sentence.",options:["He good is","He is good","Good he is","Is he good"],correct:1},
+{q:"Choose the correct sentence.",options:["They happy are","They are happy","Happy are they","They is happy"],correct:1},
+{q:"Which word asks about place?",options:["Where","Why","Who","When"],correct:0},
+{q:"'کتنے' in English?",options:["How many","Why","Where","Who"],correct:0},
+{q:"'کیوں' in English?",options:["Who","Why","When","Where"],correct:1},
+{q:"'کہاں' in English?",options:["Why","Where","Who","When"],correct:1},
+{q:"'کون' in English?",options:["Who","Where","Why","When"],correct:0},
+{q:"'کب' in English?",options:["When","Who","Where","Why"],correct:0},
+{q:"Choose correct sentence.",options:["I do work every day","I does work every day","I doing work every day","I works every day"],correct:0}
+
+]
+
+};
+
+
+/* =========================
+   STARTUP
+========================= */
+
+window.onload = function(){
+
+    let role =
+        localStorage.getItem("uSpeakRole");
+
+    if(role === "admin"){
+
+        setupRoleUI();
+        showPage("admin");
+
+    }else if(role === "student"){
+
+        currentStudent =
+            localStorage.getItem("uSpeakStudent") || "";
+
+        setupRoleUI();
+        showPage("student");
+
+    }else{
+
+        showPage("login");
+    }
+
+    shufflePuzzle();
+};
+
+</script>
+
+</body>
+</html>
+```
